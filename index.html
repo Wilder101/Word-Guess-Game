@@ -28,12 +28,15 @@
             <h3 class="p-2">Wins: <span id="display-wins"></span></h2>
             <h3 class="p-2">Current word: </h2>
             <h3 class="p-2">_ _ _ _ _ _ _:::<span id="display-word"></span></h2><br>
-            <h3 class="p-2">Number of guesses remaining: (use 12?)</h2>
+            <h3 class="p-2">Number of guesses remaining: <span id="display-num-rem"></span></h2>
             <h3 class="p-2">Letters already guessed: </h2>
             <h3 class="p-2">(list of letters here):: <span id="display-guesses"></span></h2>
 
             <!-- Update UI with game play -->
             <script>
+
+                // Game set-up
+                game.setCurrentWord();
 
                 // This function is run whenever the user presses a key.
                 document.onkeyup = function(event) {
@@ -42,8 +45,8 @@
                     var userGuess = event.key;
                     game.submitInput(userGuess);
 
-                    // Show inputs
-                    game.displayGuesses();
+                    // Check guess to see if in hangman word
+
 
 
 
@@ -51,7 +54,7 @@
 
 
                 console.log(game.currentWord);
-                // game.showWins();
+                game.showWins();
                 // game.setCurrentWord();
                 // game.showCurrentWord();
             </script>

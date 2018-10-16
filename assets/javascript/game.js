@@ -5,7 +5,6 @@ var game = {
     // Key-value pairs aka property-value pairs aka object's public (?) variables
     wins: 0,
     currentWord: [],            // current word to guess
-    // currentWordGuess: [],       // current word that has been guessed
     numGuessesRemain: 12,       // initialize at 12
     lettersGuessed: [],         // initialize empty
     wordDB: [
@@ -60,7 +59,7 @@ var game = {
 
         // Show all letter guesses (spaced with manual space, commas added by JS6 default)
         for (var i = 0; i < this.lettersGuessed.length; i++) {
-            buildDisplayString.push(" " + this.lettersGuessed[i].toUpperCase());
+            buildDisplayString.push(this.lettersGuessed[i].toUpperCase());
         }
 
         // Use JS .join method to eliminate array/string default commas at print
@@ -90,10 +89,6 @@ var game = {
         // Initialize current word
         this.currentWord = this.wordDB[0];  // TESTING with one word, not random yet
 
-        // // Initialize current word guess word
-        // for (var i = 0; i < this.currentWord.length; i++) {
-        //     this.currentWordGuess.push("_");
-        // }
     },
 
     showWins: function() {
@@ -120,20 +115,15 @@ var game = {
                 buildPrintWord[i] = "_ ";
             }
 
-
-
         }
-        // // TESTING
-        // if (this.currentWord.includes(userInput)) {
-        //     buildPrintWord.push(userInput);
-        // }
 
         // Use JS .join method to eliminate array/string default commas at print
         buildPrintWord = buildPrintWord.join(" ");
 
-        // showWord.textContent = this.currentWordGuess;
         showWord.textContent = buildPrintWord;
     }
+
+
 
 
 };

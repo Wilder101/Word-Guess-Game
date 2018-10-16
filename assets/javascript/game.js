@@ -5,7 +5,7 @@ var game = {
     // Key-value pairs aka property-value pairs aka object's public (?) variables
     wins: 0,
     currentWord: [],            // current word to guess
-    currentWordGuess: [],       // current word that has been guessed
+    // currentWordGuess: [],       // current word that has been guessed
     numGuessesRemain: 12,       // initialize at 12
     lettersGuessed: [],         // initialize empty
     wordDB: [
@@ -47,7 +47,7 @@ var game = {
             this.updateNumGuessRemaining();
 
             // Show user's input in hangman word
-            this.showCurrentWord(userInput);
+            this.showCurrentWord();
         }
     },
 
@@ -60,9 +60,12 @@ var game = {
 
         // Show all letter guesses (spaced with manual space, commas added by JS6 default)
         for (var i = 0; i < this.lettersGuessed.length; i++) {
-            buildDisplayString.push(" " + this.lettersGuessed[i])
+            buildDisplayString.push(" " + this.lettersGuessed[i].toUpperCase());
         }
 
+        // Use JS .join method to eliminate array/string default commas at print
+        buildDisplayString = buildDisplayString.join(" ");
+        
         // Update UI with all letters guessed 
         showLetters.textContent = buildDisplayString;
     },
@@ -87,10 +90,10 @@ var game = {
         // Initialize current word
         this.currentWord = this.wordDB[0];  // TESTING with one word, not random yet
 
-        // Initialize current word guess word
-        for (var i = 0; i < this.currentWord.length; i++) {
-            this.currentWordGuess.push("_");
-        }
+        // // Initialize current word guess word
+        // for (var i = 0; i < this.currentWord.length; i++) {
+        //     this.currentWordGuess.push("_");
+        // }
     },
 
     showWins: function() {
@@ -98,33 +101,38 @@ var game = {
         showWinsNumber.textContent = this.wins;
     },
 
-    showCurrentWord: function(userInput) {
+    showCurrentWord: function() {
 
-        // Display word
+        // Display word in UI
         var showWord = document.getElementById("display-word");
         var buildPrintWord = [];
 
-        // use a loop for each character in currentWord and compare it to every lettersGuessed
+        // Use a loop for each character in currentWord and compare it to every lettersGuessed
         for (var i = 0; i < this.currentWord.length; i++) {
 
-            // if (this.currentWord[i] === this.lettersGuessed.includes()) {
-            //     buildPrintWord = buildPrintWord + this.currentWord[i];
-            //     console.log(buildPrintWord);
-            // }
-            // else {
-            //     buildPrintWord = buildPrintWord + " _";
-            // }
-            if (this.currentWord[i] === userInput) {
-                this.currentWordGuess[i] = userInput;
-            }
-        }
+            var currentWordChar = this.currentWord[i];
 
+            if (this.lettersGuessed.includes(currentWordChar)) {
+                buildPrintWord[i] = currentWordChar;
+
+            }
+            else {
+                buildPrintWord[i] = "_ ";
+            }
+
+
+
+        }
         // // TESTING
         // if (this.currentWord.includes(userInput)) {
         //     buildPrintWord.push(userInput);
         // }
 
-        showWord.textContent = this.currentWordGuess;
+        // Use JS .join method to eliminate array/string default commas at print
+        buildPrintWord = buildPrintWord.join(" ");
+
+        // showWord.textContent = this.currentWordGuess;
+        showWord.textContent = buildPrintWord;
     }
 
 

@@ -3,18 +3,26 @@
 var game = {
 
     // Key-value pairs aka property-value pairs aka object's public (?) variables
+    const: numKeyTries = 12,
     wins: 0,
-    currentWord: [],            // current word to guess
-    numGuessesRemain: 12,       // initialize at 12
-    lettersGuessed: [],         // initialize empty
+    currentWord: [],                    // current word to guess
+    numGuessesRemain: numKeyTries,      // initialize at numKeyTries
+    lettersGuessed: [],                 // initialize empty
     wordDB: [
-        "handlebars",
+        "handlebars",                   // Grab the handlebars & go!
         "gasoline",
         "helmet",
         "gloves",
         "jacket",
         "sunglasses",
-        "boots"
+        "goggles",
+        "boots",
+        "lever",
+        "button",
+        "switch",
+        "mirror",
+        "engine",
+        "throttle"
     ],
 
     // // Game methods 
@@ -57,7 +65,7 @@ var game = {
         var showLetters = document.getElementById("display-guesses");
         var buildDisplayString = [];
 
-        // Show all letter guesses (spaced with manual space, commas added by JS6 default)
+        // Show all letter guesses (commas added by JS6 default)
         for (var i = 0; i < this.lettersGuessed.length; i++) {
             buildDisplayString.push(this.lettersGuessed[i].toUpperCase());
         }
@@ -91,39 +99,82 @@ var game = {
 
     },
 
-    showWins: function() {
-        var showWinsNumber = document.getElementById("display-wins");
-        showWinsNumber.textContent = this.wins;
-    },
-
     showCurrentWord: function() {
 
-        // Display word in UI
+        // Display word in UI & declare guessed word local variable
         var showWord = document.getElementById("display-word");
         var buildPrintWord = [];
 
         // Use a loop for each character in currentWord and compare it to every lettersGuessed
         for (var i = 0; i < this.currentWord.length; i++) {
 
+            // Local variable to hold current word character
             var currentWordChar = this.currentWord[i];
-
             if (this.lettersGuessed.includes(currentWordChar)) {
                 buildPrintWord[i] = currentWordChar;
-
             }
             else {
                 buildPrintWord[i] = "_ ";
             }
-
         }
+
+        // IS THIS THE PLACE TO TEST TO SEE IF THE GUESSED LETTERS == THE WORD TO GUESS?
+        // Perhaps: call a helper function to check both words, return T/F
+        // if T (same words), then game win 
+        // If F (not same word), then continue
 
         // Use JS .join method to eliminate array/string default commas at print
         buildPrintWord = buildPrintWord.join(" ");
-
         showWord.textContent = buildPrintWord;
+
+        if (this.checkWins()) {
+            this.wins++;
+            // update winner banner & image
+            // call update winning situation
+            this.winningSituation();
+        }
+
+        // CHECK FOR A LOSS SITUATION!!!
+    }, 
+
+    checkWins: function() {
+
+        var continueLoop = true;
+        // Use a loop for each character in currentWord and compare it to every lettersGuessed
+        for (var i = 0; i < this.currentWord.length && continueLoop; i++) {
+
+            // Local variable to hold current word character
+            var currentWordChar = this.currentWord[i];
+            if (this.lettersGuessed.includes(currentWordChar)) {
+                continueLoop = true;
+            }
+            else {
+                return false;   // Not a win; no need to set continueLoop = false
+            }
+        }
+
+        // Win situation if passed through loop!
+        return true;
+    },
+
+    winningSituation: function() {
+        // update winner banner & image
+        var showWinnerBannerText = document.getElementById("display-winning-catchphrase");
+        showWinnerBannerText.textContent = "HERE IS THE MESSAGE: YOU WIN!";
+            
+        // set-up next round
+        this.setCurrentWord();
+        this.numGuessesRemain = numKeyTries;
+        this.lettersGuessed = [];
+
+    },
+
+    showWinScore: function() {
+
+        // Show wins in UI
+        var showWinsNumber = document.getElementById("display-wins");
+        showWinsNumber.textContent = this.wins;
     }
-
-
 
 
 };

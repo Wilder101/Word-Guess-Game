@@ -21,7 +21,8 @@
         
         <div class="container"> <!-- Bootstrap container -->
             <h1 class="p-4 text-center">Word Guess Game aka "Motorcycle Hangman"</h1>
-            <h2 class="p-2">Guessed Correct Catchphrase (placement)</h2>
+            <h2 class="p-2 display-winning-catchphrase">Guessed Correct Catchphrase (placement)</h2>
+            <hr>
             <!-- <img UPDATE IMG WITH EACH WIN> -->
             <h2 class="p-2">Press any key to get started!</h2>
             <br>
@@ -34,24 +35,29 @@
             <!-- Update UI with game play -->
             <script>
 
+                // TO DO
+                // Validate user input
+                // Check for win situation & reset if needed; guessed letters == word to guess
+                // Check for lose situation & reset if needed; # of guesses is 0
+
                 // Game set-up
                 game.setCurrentWord();
                 game.showCurrentWord();
 
-                // This function is run whenever the user presses a key.
+                // This function is run whenever the user presses a key
                 document.onkeyup = function(event) {
 
-                    // Get character input guess from user
+                    // Get character input guess from user & play
                     var userGuess = event.key;
                     game.submitInput(userGuess);
 
-                    // Check guess to see if in hangman word
-
+                    // Check for winning condition
+                    game.showWinScore();
                 }
 
 
                 console.log(game.currentWord);
-                game.showWins();
+                
                 // game.setCurrentWord();
                 // game.showCurrentWord();
             </script>

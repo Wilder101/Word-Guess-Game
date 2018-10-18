@@ -81,14 +81,38 @@ var game = {
 
         // Add input to letters guessed if not already included in list & play
         if (!this.lettersGuessed.includes(userInput)) {
-
             // INSERT LOGIC FOR GOOD INPUTS
             this.lettersGuessed.push(userInput);
 
-            // // Show user's input in hangman word
-            // this.showCurrentWord();
+            // Display guesses
+            this.displayGuessedLetters();
+
+            // Update number of guesses remaining
+            this.updateNumGuessRemaining();
+
+            // Show user's input in hangman word
+            this.showCurrentWord();
         }
     },
+
+    // // ORIGINAL SUBMIT FUNCTION
+    // // Game user input 
+    // submitInput: function(userInput) {
+
+    //     // Add input to letters guessed if not already included in list & play
+    //     if (!this.lettersGuessed.includes(userInput)) {
+    //         this.lettersGuessed.push(userInput);
+
+    //         // Display guesses
+    //         this.displayGuesses();
+
+    //         // Update number of guesses remaining
+    //         this.updateNumGuessRemaining();
+
+    //         // Show user's input in hangman word
+    //         this.showCurrentWord();
+    //     }
+    // },
 
     // Display guessed letters
     displayGuessedLetters: function() {
@@ -155,8 +179,21 @@ var game = {
         //     this.winningSituation();
         // }
 
-        // CHECK FOR A LOSS SITUATION!!!
+
     }, 
+
+    winOrLose: function() {
+
+        if (this.checkWins()) {
+            this.wins++;
+            // update winner banner & image
+            // call update winning situation
+            this.winningSituation();
+        }
+
+        // CHECK FOR A LOSS SITUATION!!!
+
+    },
 
     checkWins: function() {
 
@@ -175,23 +212,27 @@ var game = {
         }
 
         // Win situation if passed through loop!
+        alert("Should show win score");
+        this.showWinScore();
         return true;
     },
 
     winningSituation: function() {
+
+        // alert("Winning situation!");
+
         // update winner banner & image
         var showWinnerBannerText = document.getElementById("display-winning-catchphrase");
         showWinnerBannerText.textContent = "HERE IS THE MESSAGE: YOU WIN!";
             
-        // set-up next round
-        this.setCurrentWord();
-        this.numGuessesRemain = numKeyTries;
-        this.lettersGuessed = [];
+        // // set-up next round
+        // this.initializeGameSetUp();
+        // this.numGuessesRemain = 12;
+        // this.lettersGuessed = [];
 
     },
 
     showWinScore: function() {
-
         // Show wins in UI
         var showWinsNumber = document.getElementById("display-wins");
         showWinsNumber.textContent = this.wins;

@@ -69,17 +69,18 @@
                         var userGuess = event.key;
                         game.submitInput(userGuess)
                         
-                        // Update word guess and letter displays
-                        // Display all letters guessed
-                        game.displayGuessedLetters();
+                        // // Update word guess and letter displays
+                        // // Display all letters guessed
+                        // game.displayGuessedLetters();
 
-                        // Update number of guesses remaining
-                        game.updateNumGuessRemaining();
+                        // // Update number of guesses remaining
+                        // game.updateNumGuessRemaining();
 
-                        // Display current word with guessed letters
-                        game.showCurrentWord();
+                        // // Display current word with guessed letters
+                        // game.showCurrentWord();
 
                         // Check for win state; update displays and reset
+                        game.winOrLose();
 
                         // Check for loss state; update displays and reset
                         

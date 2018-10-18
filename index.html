@@ -5,6 +5,9 @@
         <!-- Meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+          <!-- Added link to the jQuery Library and game.js-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="assets/javascript/game.js"></script>
 
         <!-- favicon --> <!-- POPULATE BEFORE FINALIZATION -->
@@ -33,30 +36,62 @@
             <h3 class="p-2">Letters already guessed: <span id="display-guesses"></span></h3>
 
             <!-- Update UI with game play -->
-            <script>
+            <script type="text/javascript">
 
-                // TO DO
-                // Validate user input
-                // Check for win situation & reset if needed; guessed letters == word to guess
-                // Check for lose situation & reset if needed; # of guesses is 0
+                $(document).ready(function() {
 
-                // Game set-up
-                game.setCurrentWord();
-                game.showCurrentWord();
+                    // TO DO
+                    // Validate user input
+                    // Check for win situation & reset if needed; guessed letters == word to guess
+                    // Check for lose situation & reset if needed; # of guesses is 0
 
-                // This function is run whenever the user presses a key
-                document.onkeyup = function(event) {
+                    // Game set-up
+                    // game.setCurrentWord();
+                    // game.showCurrentWord();
 
-                    // Get character input guess from user & play
-                    var userGuess = event.key;
-                    game.submitInput(userGuess);
+                    // NEW GAME SET-UP
+                    game.initializeGameSetUp();
+                    game.showCurrentWord();
 
-                    // Check for winning condition
-                    game.showWinScore();
-                }
+                    // This function is run whenever the user presses a key
+                    document.onkeyup = function(event) {
+
+                        // Get character input guess from user & play
+                        // var userGuess = event.key;
+                        // game.submitInput(userGuess);
+
+                        // Check for winning condition
+                        //game.showWinScore();
+
+                        // REWORK & SIMPLIFY ******* ******* ******* *******
+
+                        // Get character input from user (and validate user input later)
+                        var userGuess = event.key;
+                        game.submitInput(userGuess)
+                        
+                        // Update word guess and letter displays
+                        // Display all letters guessed
+                        game.displayGuessedLetters();
+
+                        // Update number of guesses remaining
+                        game.updateNumGuessRemaining();
+
+                        // Display current word with guessed letters
+                        game.showCurrentWord();
+
+                        // Check for win state; update displays and reset
+
+                        // Check for loss state; update displays and reset
+                        
 
 
-                console.log(game.currentWord);
+
+
+                    }
+                });
+
+
+                //console.log(game.currentWord);
                 
                 // game.setCurrentWord();
                 // game.showCurrentWord();

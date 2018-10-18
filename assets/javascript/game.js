@@ -1,15 +1,17 @@
 /* Word Guess Game by WBM, 10/15/18, game.js file */
 
 var game = {
+// class Game {
 
-    // Key-value pairs aka property-value pairs aka object's public (?) variables
-    const: numKeyTries = 12,
-    wins: 0,
-    currentWord: [],                    // current word to guess
-    numGuessesRemain: numKeyTries,      // initialize at numKeyTries
-    lettersGuessed: [],                 // initialize empty
-    wordDB: [
-        "handlebars",                   // Grab the handlebars & go!
+    // Property-value pairs
+    numKeyTriesConst: 12,           // to be a constant for number of key tries for user
+    wins            : 0,            // number of wins user has achieved
+    currentWord     : [],           // current word to guess
+    // numGuessesRemain: numKeyTries,  // number of guesses remaining
+    numGuessesRemain: 12,  // number of guesses remaining
+    lettersGuessed  : [],           // array of letters guessed
+    wordDB          : [
+        "handlebars",               // Grab the handlebars & go!
         "gasoline",
         "helmet",
         "gloves",
@@ -40,26 +42,56 @@ var game = {
     //     this.numGuessesRemain = 12;
     // },
 
+    // // Game methods 
+    // setCurrentWord: function() {
+
+    //     // Get a new random word from word "database"
+    //     // this.currentWord = this.wordDB[Math.floor(Math.random() * this.wordDB.length)];
+
+    //     // USE THIS FOR PRODUCTION ********************************************
+    //     // // For each iteration, generate a new random number between 1 and 9.
+    //     // var random = Math.floor(Math.random() * 9) + 1;
+        
+    //     // Initialize current word
+    //     this.currentWord = this.wordDB[0];  // TESTING with one word, not random yet
+
+    // },
+
+    // Game method to set-up game for a round
+    initializeGameSetUp: function() {
+
+        // Get a new random word from word "database"
+        // this.currentWord = this.wordDB[Math.floor(Math.random() * this.wordDB.length)];
+
+        // USE THIS FOR PRODUCTION ********************************************
+        // // For each iteration, generate a new random number between 1 and 9.
+        // var random = Math.floor(Math.random() * 9) + 1;
+        
+        // Initialize current word & reset letters guessed
+        this.currentWord = this.wordDB[0];  // TESTING with one word, not random yet
+        this.lettersGuessed = [];
+        this.numGuessesRemain = this.numKeyTriesConst;
+        
+        //alert("initialize called");
+
+    },
+
     // Game user input 
     submitInput: function(userInput) {
 
         // Add input to letters guessed if not already included in list & play
         if (!this.lettersGuessed.includes(userInput)) {
+
+            // INSERT LOGIC FOR GOOD INPUTS
             this.lettersGuessed.push(userInput);
 
-            // Display guesses
-            this.displayGuesses();
-
-            // Update number of guesses remaining
-            this.updateNumGuessRemaining();
-
-            // Show user's input in hangman word
-            this.showCurrentWord();
+            // // Show user's input in hangman word
+            // this.showCurrentWord();
         }
     },
 
-    // Display guesses helper method
-    displayGuesses: function() {
+    // Display guessed letters
+    displayGuessedLetters: function() {
 
         // Local variables
         var showLetters = document.getElementById("display-guesses");
@@ -77,7 +109,7 @@ var game = {
         showLetters.textContent = buildDisplayString;
     },
 
-    // Update number of guesses remaining helper method
+    // Update number of guesses remaining
     updateNumGuessRemaining: function() {
 
         // Decrement remaining guesses
@@ -86,17 +118,6 @@ var game = {
         // Display guess number remaining in UI
         var remainingGuesses = document.getElementById("display-num-rem");
         remainingGuesses.textContent = this.numGuessesRemain;
-    },
-
-    // Game methods 
-    setCurrentWord: function() {
-
-        // Get a new random word from word "database"
-        // this.currentWord = this.wordDB[Math.floor(Math.random() * this.wordDB.length)];
-        
-        // Initialize current word
-        this.currentWord = this.wordDB[0];  // TESTING with one word, not random yet
-
     },
 
     showCurrentWord: function() {
@@ -127,12 +148,12 @@ var game = {
         buildPrintWord = buildPrintWord.join(" ");
         showWord.textContent = buildPrintWord;
 
-        if (this.checkWins()) {
-            this.wins++;
-            // update winner banner & image
-            // call update winning situation
-            this.winningSituation();
-        }
+        // if (this.checkWins()) {
+        //     this.wins++;
+        //     // update winner banner & image
+        //     // call update winning situation
+        //     this.winningSituation();
+        // }
 
         // CHECK FOR A LOSS SITUATION!!!
     }, 

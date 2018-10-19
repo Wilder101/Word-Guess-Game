@@ -10,6 +10,8 @@ var game = {
     // numGuessesRemain: numKeyTries,  // number of guesses remaining
     numGuessesRemain: 12,  // number of guesses remaining
     lettersGuessed  : [],           // array of letters guessed
+    weHaveAWinner   : false,        // flag for a win
+    weHaveALoser    : false,        // flag for a lose
     wordDB          : [
         "handlebars",               // Grab the handlebars & go!
         "gasoline",
@@ -185,9 +187,12 @@ var game = {
     winOrLose: function() {
 
         if (this.checkWins()) {
+            // this.wins++;
+            // // update winner banner & image
+            // // call update winning situation
+            this.weHaveAWinner = true;              // EXPERIMENTAL
             this.wins++;
-            // update winner banner & image
-            // call update winning situation
+            this.showWinScore();
             this.winningSituation();
         }
 
@@ -197,23 +202,20 @@ var game = {
 
     checkWins: function() {
 
-        var continueLoop = true;
+        // var continueLoop = true;
+
         // Use a loop for each character in currentWord and compare it to every lettersGuessed
-        for (var i = 0; i < this.currentWord.length && continueLoop; i++) {
+        for (var i = 0; i < this.currentWord.length; i++) {
 
             // Local variable to hold current word character
             var currentWordChar = this.currentWord[i];
-            if (this.lettersGuessed.includes(currentWordChar)) {
-                continueLoop = true;
-            }
-            else {
-                return false;   // Not a win; no need to set continueLoop = false
+            if (!this.lettersGuessed.includes(currentWordChar)) {
+                return false;
             }
         }
 
         // Win situation if passed through loop!
-        alert("Should show win score");
-        this.showWinScore();
+        // alert("Should show win score");
         return true;
     },
 

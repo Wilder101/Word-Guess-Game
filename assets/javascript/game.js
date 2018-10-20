@@ -8,7 +8,7 @@ var game = {
     wins            : 0,            // number of wins user has achieved
     currentWord     : [],           // current word to guess
     // numGuessesRemain: numKeyTries,  // number of guesses remaining
-    numGuessesRemain: 12,  // number of guesses remaining
+    numGuessesRemain: 12,           // number of guesses remaining
     lettersGuessed  : [],           // array of letters guessed
     weHaveAWinner   : false,        // flag for a win
     weHaveALoser    : false,        // flag for a lose
@@ -73,6 +73,8 @@ var game = {
         this.currentWord = this.wordDB[0];  // TESTING with one word, not random yet
         this.lettersGuessed = [];
         this.numGuessesRemain = this.numKeyTriesConst;
+        this.weHaveAWinner = false;
+        this.weHaveALoser = false;
         
         //alert("initialize called");
 
@@ -187,22 +189,36 @@ var game = {
     winOrLose: function() {
 
         if (this.checkWins()) {
-            // this.wins++;
             // // update winner banner & image
             // // call update winning situation
             this.weHaveAWinner = true;              // EXPERIMENTAL
             this.wins++;
-            this.showWinScore();
-            this.winningSituation();
+            // this.showWinScore();
+                var showWinsNumber = document.getElementById("display-wins");
+                showWinsNumber.textContent = this.wins;
+            // this.winningSituation();
+                var showWinnerBannerText = document.getElementById("display-winning-catchphrase");
+                showWinnerBannerText.textContent = "YOU WIN!";
+            
+            // Reset game for next round
+            this.initializeGameSetUp();
+            
         }
 
         // CHECK FOR A LOSS SITUATION!!!
+        if (this.checkForLoss()) {
+            this.weHaveALoser = true;             // EXPERIMENTAL
+
+            var showWinnerBannerText = document.getElementById("display-winning-catchphrase");
+            showWinnerBannerText.textContent = "YOU LOST. TRY AGAIN!";
+
+            // Reset game for next round
+            this.initializeGameSetUp();
+        }
 
     },
 
     checkWins: function() {
-
-        // var continueLoop = true;
 
         // Use a loop for each character in currentWord and compare it to every lettersGuessed
         for (var i = 0; i < this.currentWord.length; i++) {
@@ -219,6 +235,17 @@ var game = {
         return true;
     },
 
+    checkForLoss: function() {
+
+        if (this.numGuessesRemain === 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    },
+
+    // NO LONGER CALLED, PLACED IN winOrLose()
     winningSituation: function() {
 
         // alert("Winning situation!");
@@ -234,6 +261,7 @@ var game = {
 
     },
 
+    // NO LONGER CALLED, PLACED IN winOrLose()
     showWinScore: function() {
         // Show wins in UI
         var showWinsNumber = document.getElementById("display-wins");

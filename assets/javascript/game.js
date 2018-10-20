@@ -6,12 +6,12 @@ var game = {
     // Property-value pairs
     numKeyTriesConst: 12,           // to be a constant for number of key tries for user
     wins            : 0,            // number of wins user has achieved
-    currentWord     : [],           // current word to guess
     // numGuessesRemain: numKeyTries,  // number of guesses remaining
     numGuessesRemain: 12,           // number of guesses remaining
     lettersGuessed  : [],           // array of letters guessed
     weHaveAWinner   : false,        // flag for a win
     weHaveALoser    : false,        // flag for a lose
+    currentWord     : [],           // current word to guess
     wordDB          : [
         "handlebars",               // Grab the handlebars & go!
         "gasoline",
@@ -75,8 +75,7 @@ var game = {
         this.numGuessesRemain = this.numKeyTriesConst;
         this.weHaveAWinner = false;
         this.weHaveALoser = false;
-        
-        //alert("initialize called");
+        this.showCurrentWord();
 
     },
 
@@ -193,13 +192,11 @@ var game = {
             // // call update winning situation
             this.weHaveAWinner = true;              // EXPERIMENTAL
             this.wins++;
-            // this.showWinScore();
-                var showWinsNumber = document.getElementById("display-wins");
-                showWinsNumber.textContent = this.wins;
-            // this.winningSituation();
-                var showWinnerBannerText = document.getElementById("display-winning-catchphrase");
-                showWinnerBannerText.textContent = "YOU WIN!";
             
+            // Update displays
+            $("#display-wins").text(this.wins);
+            $("#display-catchphrase").text("YOU WIN! \"" + this.currentWord + "\" is correct.");
+
             // Reset game for next round
             this.initializeGameSetUp();
             
@@ -207,10 +204,11 @@ var game = {
 
         // CHECK FOR A LOSS SITUATION!!!
         if (this.checkForLoss()) {
+
             this.weHaveALoser = true;             // EXPERIMENTAL
 
-            var showWinnerBannerText = document.getElementById("display-winning-catchphrase");
-            showWinnerBannerText.textContent = "YOU LOST. TRY AGAIN!";
+            // Update display
+            $("#display-catchphrase").text("YOU LOST. TRY AGAIN!");
 
             // Reset game for next round
             this.initializeGameSetUp();
@@ -251,7 +249,7 @@ var game = {
         // alert("Winning situation!");
 
         // update winner banner & image
-        var showWinnerBannerText = document.getElementById("display-winning-catchphrase");
+        var showWinnerBannerText = document.getElementById("display-catchphrase");
         showWinnerBannerText.textContent = "HERE IS THE MESSAGE: YOU WIN!";
             
         // // set-up next round
@@ -263,6 +261,7 @@ var game = {
 
     // NO LONGER CALLED, PLACED IN winOrLose()
     showWinScore: function() {
+        
         // Show wins in UI
         var showWinsNumber = document.getElementById("display-wins");
         showWinsNumber.textContent = this.wins;

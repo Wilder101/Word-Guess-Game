@@ -5,12 +5,9 @@ var game = {
 
     // Property-value pairs
     numKeyTriesConst: 12,           // to be a constant for number of key tries for user
-    wins            : 0,            // number of wins user has achieved
-    // numGuessesRemain: numKeyTries,  // number of guesses remaining
     numGuessesRemain: 12,           // number of guesses remaining
+    wins            : 0,            // number of wins user has achieved
     lettersGuessed  : [],           // array of letters guessed
-    // weHaveAWinner   : false,        // flag for a win
-    // weHaveALoser    : false,        // flag for a lose
     currentWord     : [],           // current word to guess
     wordDB          : [
         "handlebars",               // Grab the handlebars & go!
@@ -29,52 +26,17 @@ var game = {
         "throttle"
     ],
 
-    // // Game methods 
-    // initializeGame: function() {
-    //     // var computerChoices = ["r", "p", "s"];
-    //     // var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
-
-    //     // Get a new word from word "database"
-    //     this.currentWord = this.wordDB[Math.floor(Math.random() * this.wordDB.length)];
-
-    //     // Reset user's letters guessed to contain nothing
-    //     this.lettersGuessed = [];
-
-    //     // Reset number of guesses remaining to 12
-    //     this.numGuessesRemain = 12;
-    // },
-
-    // // Game methods 
-    // setCurrentWord: function() {
-
-    //     // Get a new random word from word "database"
-    //     // this.currentWord = this.wordDB[Math.floor(Math.random() * this.wordDB.length)];
-
-    //     // USE THIS FOR PRODUCTION ********************************************
-    //     // // For each iteration, generate a new random number between 1 and 9.
-    //     // var random = Math.floor(Math.random() * 9) + 1;
-        
-    //     // Initialize current word
-    //     this.currentWord = this.wordDB[0];  // TESTING with one word, not random yet
-
-    // },
-
     // Game method to set-up game for a round
     initializeGameSetUp: function() {
 
         // Get a new random word from word "database"
-        // this.currentWord = this.wordDB[Math.floor(Math.random() * this.wordDB.length)];
+        var random = Math.floor(Math.random() * this.wordDB.length) + 1;
+        this.currentWord = this.wordDB[random];
+        alert("Random index: " + random + " --- currentWord is: " + this.currentWord);
 
-        // USE THIS FOR PRODUCTION ********************************************
-        // // For each iteration, generate a new random number between 1 and 9.
-        // var random = Math.floor(Math.random() * 9) + 1;
-        
-        // Initialize current word & reset letters guessed
-        this.currentWord = this.wordDB[0];  // TESTING with one word, not random yet
+        // Reset letters guessed and remaining guesses count
         this.lettersGuessed = [];
         this.numGuessesRemain = this.numKeyTriesConst;
-        // this.weHaveAWinner = false;
-        // this.weHaveALoser = false;
 
         // Initialize display
         this.showCurrentWord();
@@ -165,14 +127,11 @@ var game = {
     winOrLose: function() {
 
         if (this.checkWins()) {
-            // // update winner banner & image
-            // // call update winning situation
-            // this.weHaveAWinner = true;              // EXPERIMENTAL
+            
             this.wins++;
             
-            // Update displays
-            // $("#display-wins").text(this.wins);
-            $("#display-catchphrase").text("YOU WIN! \"" + this.currentWord + "\" is correct.");
+            // Update display
+            $("#display-catchphrase").text("YOU WIN! The word \"" + this.currentWord + "\" was correct.");
 
             // Reset game for next round
             this.initializeGameSetUp();
@@ -180,12 +139,9 @@ var game = {
         }
 
         // CHECK FOR A LOSS SITUATION!!!
-        if (this.checkForLoss()) {
+        else if (this.checkForLoss()) {
 
-            // this.weHaveALoser = true;             // EXPERIMENTAL
-
-            // Update displays
-            // $("#display-wins").text(this.wins);
+            // Update display
             $("#display-catchphrase").text("YOU LOST! The word was \"" + this.currentWord + ".\" Try a new word.");
 
             // Reset game for next round
@@ -207,7 +163,6 @@ var game = {
         }
 
         // Win situation if passed through loop!
-        // alert("Should show win score");
         return true;
     },
 
@@ -219,31 +174,9 @@ var game = {
         else {
             return false;
         }
-    },
-
-    // NO LONGER CALLED, PLACED IN winOrLose()
-    winningSituation: function() {
-
-        // alert("Winning situation!");
-
-        // update winner banner & image
-        var showWinnerBannerText = document.getElementById("display-catchphrase");
-        showWinnerBannerText.textContent = "HERE IS THE MESSAGE: YOU WIN!";
-            
-        // // set-up next round
-        // this.initializeGameSetUp();
-        // this.numGuessesRemain = 12;
-        // this.lettersGuessed = [];
-
-    },
-
-    // NO LONGER CALLED, PLACED IN winOrLose()
-    showWinScore: function() {
-        
-        // Show wins in UI
-        var showWinsNumber = document.getElementById("display-wins");
-        showWinsNumber.textContent = this.wins;
     }
+
+
 
 
 };

@@ -20,7 +20,7 @@ var game = {
         "goggles",
         "boots",
         "lever",
-        "button",
+        "horn",
         "switch",
         "mirrors",
         "engine",

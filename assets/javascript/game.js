@@ -15,13 +15,14 @@ var game = {
         "helmet",
         "gloves",
         "jacket",
+        "leather",
         "sunglasses",
         "goggles",
         "boots",
         "lever",
         "button",
         "switch",
-        "mirror",
+        "mirrors",
         "engine",
         "throttle"
     ],
@@ -32,7 +33,6 @@ var game = {
         // Get a new random word from word "database"
         var random = Math.floor(Math.random() * this.wordDB.length) + 1;
         this.currentWord = this.wordDB[random];
-        alert("Random index: " + random + " --- currentWord is: " + this.currentWord);
 
         // Reset letters guessed and remaining guesses count
         this.lettersGuessed = [];
@@ -43,7 +43,6 @@ var game = {
         $("#display-wins").text(this.wins);
         $("#display-num-rem").text(this.numGuessesRemain);
         $("#display-guesses").text(this.displayGuessedLetters());
-
     },
 
     // Game user input 
@@ -99,9 +98,10 @@ var game = {
         remainingGuesses.textContent = this.numGuessesRemain;
     },
 
+    // Show the current word in the UI
     showCurrentWord: function() {
 
-        // Display word in UI & declare guessed word local variable
+        // Declare local variables
         var showWord = document.getElementById("display-word");
         var buildPrintWord = [];
 
@@ -124,6 +124,7 @@ var game = {
 
     }, 
 
+    // Check for a win or lose situation
     winOrLose: function() {
 
         if (this.checkWins()) {
@@ -150,6 +151,7 @@ var game = {
 
     },
 
+    // Check wins
     checkWins: function() {
 
         // Use a loop for each character in currentWord and compare it to every lettersGuessed
@@ -166,6 +168,7 @@ var game = {
         return true;
     },
 
+    // Check for loss
     checkForLoss: function() {
 
         if (this.numGuessesRemain === 0) {
@@ -175,8 +178,5 @@ var game = {
             return false;
         }
     }
-
-
-
 
 };

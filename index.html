@@ -24,14 +24,15 @@
         
         <div class="container"> <!-- Bootstrap container -->
             
-            <h1 class="p-4 text-center">Word Guess Game aka "Motorcycle Hangman"</h1>
+            <!-- <h1 class="p-4 text-center">Word Guess Game aka "Motorcycle Hangman"</h1> -->
+            <div class="p-4 text-center">
+                <h1>Word Guess Game</h1>
+                <h1>aka "Motorcycle Hangman"</h1>
+            </div>
             <p class="p-2 text-center">Press any key to play!</p>
-            <!-- <h2 class="p-2" id="display-catchphrase">Guess the current word.</h2> -->
             <hr>
-            <!-- <img UPDATE IMG WITH EACH WIN> -->
-            <!-- <p class="p-2">Press any key to get started!</p> -->
-            <h2 class="p-2" id="display-catchphrase">Guess the current word.</h2>
-            <br>
+            <h2 class="p-2" id="display-catchphrase">Guess the current word.</h2><br>
+
             <h3 class="p-2">Wins: <span id="display-wins"></span></h3>
             <h3 class="p-2">Current word: </h3>
             <h1 class="p-2"><span id="display-word"></span></h1><br>
@@ -43,29 +44,21 @@
 
                 $(document).ready(function() {
 
-                    // TO DO
-                    // Validate user input
-                    // Add CSS
-                    // Add images
-                    // Add sounds
-
-                    // NEW GAME SET-UP
+                    // New game set-up
                     game.initializeGameSetUp();
                     game.showCurrentWord();
 
                     // This function is run whenever the user presses a key
                     document.onkeyup = function(event) {
 
-                        // Get character input from user (and validate user input later)
+                        // Get character input from user
                         var userGuess = event.key;
                         game.submitInput(userGuess)
 
                         // Check for win state; update displays and reset
                         game.winOrLose();
-
                     }
                 });
-
 
             </script>
         </div> <!-- end Bootstrap container -->

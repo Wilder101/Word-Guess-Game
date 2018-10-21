@@ -1,7 +1,7 @@
 # Word-Guess-Game
 :motorcycle:
 
-##Word Guess Game is a fun game of motorcycle-themed Hangman. 
+## Word Guess Game is a fun game of motorcycle-themed Hangman. 
 
 **How to play:**
 A player guesses letters in a word. If all of the correct letters are guessed by the player for that word before running out of guess chances, the play wins that round. If the player does not successfully guess the word within the allotted number of letter guesses, the play loses the round.

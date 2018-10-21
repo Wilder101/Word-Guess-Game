@@ -1,4 +1,5 @@
 # Word-Guess-Game
+:motorcycle:
 Word Guess Game is a fun game of motorcycle-themed Hangman. 
 
 How to play:

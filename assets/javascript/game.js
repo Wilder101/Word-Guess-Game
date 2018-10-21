@@ -121,7 +121,6 @@ var game = {
         // Use JS .join method to eliminate array/string default commas at print
         buildPrintWord = buildPrintWord.join(" ");
         showWord.textContent = buildPrintWord;
-
     }, 
 
     // Check for a win or lose situation
@@ -136,7 +135,6 @@ var game = {
 
             // Reset game for next round
             this.initializeGameSetUp();
-            
         }
 
         // CHECK FOR A LOSS SITUATION!!!
@@ -148,7 +146,6 @@ var game = {
             // Reset game for next round
             this.initializeGameSetUp();
         }
-
     },
 
     // Check wins
@@ -178,5 +175,4 @@ var game = {
             return false;
         }
     }
-
 };

@@ -25,10 +25,12 @@
         <div class="container"> <!-- Bootstrap container -->
             
             <h1 class="p-4 text-center">Word Guess Game aka "Motorcycle Hangman"</h1>
-            <h2 class="p-2" id="display-catchphrase">Guess the current word.</h2>
+            <p class="p-2 text-center">Press any key to play!</p>
+            <!-- <h2 class="p-2" id="display-catchphrase">Guess the current word.</h2> -->
             <hr>
             <!-- <img UPDATE IMG WITH EACH WIN> -->
-            <p class="p-2">Press any key to get started!</p>
+            <!-- <p class="p-2">Press any key to get started!</p> -->
+            <h2 class="p-2" id="display-catchphrase">Guess the current word.</h2>
             <br>
             <h3 class="p-2">Wins: <span id="display-wins"></span></h3>
             <h3 class="p-2">Current word: </h3>
@@ -43,12 +45,9 @@
 
                     // TO DO
                     // Validate user input
-                    // Check for win situation & reset if needed; guessed letters == word to guess
-                    // Check for lose situation & reset if needed; # of guesses is 0
-
-                    // Game set-up
-                    // game.setCurrentWord();
-                    // game.showCurrentWord();
+                    // Add CSS
+                    // Add images
+                    // Add sounds
 
                     // NEW GAME SET-UP
                     game.initializeGameSetUp();
@@ -57,50 +56,18 @@
                     // This function is run whenever the user presses a key
                     document.onkeyup = function(event) {
 
-                        // Get character input guess from user & play
-                        // var userGuess = event.key;
-                        // game.submitInput(userGuess);
-
-                        // Check for winning condition
-                        //game.showWinScore();
-
-                        // REWORK & SIMPLIFY ******* ******* ******* *******
-
                         // Get character input from user (and validate user input later)
                         var userGuess = event.key;
                         game.submitInput(userGuess)
-                        
-                        // // Update word guess and letter displays
-                        // // Display all letters guessed
-                        // game.displayGuessedLetters();
-
-                        // // Update number of guesses remaining
-                        // game.updateNumGuessRemaining();
-
-                        // // Display current word with guessed letters
-                        // game.showCurrentWord();
 
                         // Check for win state; update displays and reset
                         game.winOrLose();
-
-                        // Check for loss state; update displays and reset
-                        
-
-
-
 
                     }
                 });
 
 
-                //console.log(game.currentWord);
-                
-                // game.setCurrentWord();
-                // game.showCurrentWord();
             </script>
-            
-
-
         </div> <!-- end Bootstrap container -->
     </body>
 </html>

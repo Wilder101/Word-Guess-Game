@@ -9,8 +9,8 @@ var game = {
     // numGuessesRemain: numKeyTries,  // number of guesses remaining
     numGuessesRemain: 12,           // number of guesses remaining
     lettersGuessed  : [],           // array of letters guessed
-    weHaveAWinner   : false,        // flag for a win
-    weHaveALoser    : false,        // flag for a lose
+    // weHaveAWinner   : false,        // flag for a win
+    // weHaveALoser    : false,        // flag for a lose
     currentWord     : [],           // current word to guess
     wordDB          : [
         "handlebars",               // Grab the handlebars & go!
@@ -73,9 +73,14 @@ var game = {
         this.currentWord = this.wordDB[0];  // TESTING with one word, not random yet
         this.lettersGuessed = [];
         this.numGuessesRemain = this.numKeyTriesConst;
-        this.weHaveAWinner = false;
-        this.weHaveALoser = false;
+        // this.weHaveAWinner = false;
+        // this.weHaveALoser = false;
+
+        // Initialize display
         this.showCurrentWord();
+        $("#display-wins").text(this.wins);
+        $("#display-num-rem").text(this.numGuessesRemain);
+        $("#display-guesses").text(this.displayGuessedLetters());
 
     },
 
@@ -84,7 +89,11 @@ var game = {
 
         // Add input to letters guessed if not already included in list & play
         if (!this.lettersGuessed.includes(userInput)) {
-            // INSERT LOGIC FOR GOOD INPUTS
+            
+            // Make all inputs to be lower case for easy of play
+            userInput = userInput.toLowerCase();
+
+            // Add input to letters guessed
             this.lettersGuessed.push(userInput);
 
             // Display guesses
@@ -97,25 +106,6 @@ var game = {
             this.showCurrentWord();
         }
     },
-
-    // // ORIGINAL SUBMIT FUNCTION
-    // // Game user input 
-    // submitInput: function(userInput) {
-
-    //     // Add input to letters guessed if not already included in list & play
-    //     if (!this.lettersGuessed.includes(userInput)) {
-    //         this.lettersGuessed.push(userInput);
-
-    //         // Display guesses
-    //         this.displayGuesses();
-
-    //         // Update number of guesses remaining
-    //         this.updateNumGuessRemaining();
-
-    //         // Show user's input in hangman word
-    //         this.showCurrentWord();
-    //     }
-    // },
 
     // Display guessed letters
     displayGuessedLetters: function() {
@@ -166,22 +156,9 @@ var game = {
             }
         }
 
-        // IS THIS THE PLACE TO TEST TO SEE IF THE GUESSED LETTERS == THE WORD TO GUESS?
-        // Perhaps: call a helper function to check both words, return T/F
-        // if T (same words), then game win 
-        // If F (not same word), then continue
-
         // Use JS .join method to eliminate array/string default commas at print
         buildPrintWord = buildPrintWord.join(" ");
         showWord.textContent = buildPrintWord;
-
-        // if (this.checkWins()) {
-        //     this.wins++;
-        //     // update winner banner & image
-        //     // call update winning situation
-        //     this.winningSituation();
-        // }
-
 
     }, 
 
@@ -190,11 +167,11 @@ var game = {
         if (this.checkWins()) {
             // // update winner banner & image
             // // call update winning situation
-            this.weHaveAWinner = true;              // EXPERIMENTAL
+            // this.weHaveAWinner = true;              // EXPERIMENTAL
             this.wins++;
             
             // Update displays
-            $("#display-wins").text(this.wins);
+            // $("#display-wins").text(this.wins);
             $("#display-catchphrase").text("YOU WIN! \"" + this.currentWord + "\" is correct.");
 
             // Reset game for next round
@@ -205,10 +182,11 @@ var game = {
         // CHECK FOR A LOSS SITUATION!!!
         if (this.checkForLoss()) {
 
-            this.weHaveALoser = true;             // EXPERIMENTAL
+            // this.weHaveALoser = true;             // EXPERIMENTAL
 
-            // Update display
-            $("#display-catchphrase").text("YOU LOST. TRY AGAIN!");
+            // Update displays
+            // $("#display-wins").text(this.wins);
+            $("#display-catchphrase").text("YOU LOST! The word was \"" + this.currentWord + ".\" Try a new word.");
 
             // Reset game for next round
             this.initializeGameSetUp();

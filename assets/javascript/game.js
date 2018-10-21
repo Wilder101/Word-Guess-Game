@@ -31,7 +31,7 @@ var game = {
     initializeGameSetUp: function() {
 
         // Get a new random word from word "database"
-        var random = Math.floor(Math.random() * this.wordDB.length) + 1;
+        var random = Math.floor(Math.random() * this.wordDB.length);
         this.currentWord = this.wordDB[random];
 
         // Reset letters guessed and remaining guesses count

@@ -1,7 +1,6 @@
 /* Word Guess Game by WBM, 10/15/18, game.js file */
 
 var game = {
-// class Game {
 
     // Property-value pairs
     numKeyTriesConst: 12,           // to be a constant for number of key tries for user
